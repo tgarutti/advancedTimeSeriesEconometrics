@@ -1,0 +1,469 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[dvips]{graphicx}
+\usepackage[centertags,reqno]{amsmath}
+\usepackage{verbatim,amssymb,natbib,longtable,subfigure}
+\usepackage{threeparttable}
+\usepackage{dcolumn}
+\usepackage{multirow}
+\usepackage[usenames]{color}
+\usepackage[twoside]{rotating}
+
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+\newcommand{\ctext}[1]{\multicolumn{1}{c}{#1}}
+\newcommand{\mr}{\multirow{2}{28pt}}
+\newcommand{\EE}{\mathbf{E}}
+\newcommand{\Rrho}{\boldsymbol{\rho}}
+\newcommand{\Ddelta}{\boldsymbol{\delta}}
+\newcommand{\zavg}{\bar{z}}
+\newcommand{\Y}[2]{\:{#2}\negmedspace\thinspace{#1}}
+
+\newcommand{\Aa}{\mathbf{a}}
+\newcommand{\AAA}{\mathbf{A}}
+\newcommand{\BB}{\mathbf{B}}
+\newcommand{\DD}{\mathbf{D}}
+\newcommand{\Ee}{\mathbf{e}}
+\newcommand{\Ff}{\mathbf{f}}
+\newcommand{\II}{\mathbf{I}}
+\newcommand{\MM}{\mathbf{M}}
+\newcommand{\PP}{\mathbf{P}}
+\newcommand{\Rr}{\mathbf{r}}
+\newcommand{\Uu}{\mathbf{u}}
+\newcommand{\Vv}{\mathbf{v}}
+\newcommand{\VV}{\mathbf{V}}
+\newcommand{\Ww}{\mathbf{w}}
+\newcommand{\Xx}{\mathbf{x}}
+\newcommand{\XX}{\mathbf{X}}
+\newcommand{\Yy}{\mathbf{y}}
+\newcommand{\Zz}{\mathbf{z}}
+\newcommand{\Bbeta}{\boldsymbol{\beta}}
+\newcommand{\Eeta}{\boldsymbol{\eta}}
+\newcommand{\GGamma}{\boldsymbol{\Gamma}}
+\newcommand{\Iiota}{\boldsymbol{\iota}}
+\newcommand{\Llambda}{\boldsymbol{\lambda}}
+\newcommand{\LLambda}{\boldsymbol{\Lambda}}
+\newcommand{\SSigma}{\boldsymbol{\Sigma}}
+\newcommand{\Oomega}{\boldsymbol{\omega}}
+
+\newcommand{\BA}{\mathbf{A}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\Cc}{\mathbf{c}}
+\newcommand{\FF}{\mathbf{F}}
+\newcommand{\GG}{\mathbf{G}}
+\newcommand{\HH}{\mathbf{H}}
+
+\newcommand{\JJ}{\mathbf{J}}
+\newcommand{\LL}{\mathbf{L}}
+\newcommand{\Mm}{\mathbf{m}}
+
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\RR}{\mathbf{R}}
+
+
+\newcommand{\Eeps}{\boldsymbol{\varepsilon}}
+\newcommand{\Mmu}{\boldsymbol{\mu}}
+\newcommand{\Pphi}{\boldsymbol{\phi}}
+\newcommand{\PPhi}{\boldsymbol{\Phi}}
+\newcommand{\PPsi}{\boldsymbol{\Psi}}
+\newcommand{\Xxi}{\boldsymbol{\xi}}
+\newcommand{\UUpsilon}{\boldsymbol{\Upsilon}}
+
+\newcommand{\Ttheta}{\boldsymbol{\theta}}
+
+
+\newenvironment{myitemize}
+  {\begin{itemize}\setlength{\itemsep}{-4pt}}{\end{itemize}}
+\newenvironment{myenumerate}
+    {\begin{enumerate}\setlength{\itemsep}{-4pt}}{\end{enumerate}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MARGINS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\oddsidemargin 0.3cm \textwidth 15.04cm \textheight 23.04cm
+\topmargin -1.0cm
+
+\begin{document}
+
+\noindent\textbf{MSc Econometrics and Management Science}\newline \textbf{Assignment for FEM21038-18 (Advanced Time Series Econometrics)}\newline
+
+\medskip\noindent
+\textbf{Instructions}
+\bigskip\newline\noindent This assignment covers two important topics from this course: state space and Markov switching models. The assignment should be done in pairs and you are not allowed to cooperate with other groups. 
+
+Your answers should consist of complete sentences, which can be understood independently of the questions. 
+ \medskip\newline\noindent
+\emph{Note 1}: Motivate your answers! You will be rewarded points for showing you understand the technical aspects of the course, but also for intuitive, clearly written explanations, which demonstrate you master the subject at a deeper level. 
+\medskip\newline\noindent
+\emph{Note 2}: Feel free to use the Matlab demo codes provided during the course as your starting point. While these are provided for your convenience, note that they will not be sufficient to answer all questions. Of course you are free to use any other software. 
+\newline
+
+\textbf{Submission guidelines:} 
+\begin{itemize}
+\item Please answer the questions in the assignment as stated. In other words, there is no need to write additional material/explanation in the form of a `report'. You may actually find it useful to use the equations/tables in this LaTeX file as your starting point. 
+\item Reports should be be submitted via Canvas (under ``Assignments'' on the course pages). The submission deadline is \textbf{23 November 2018, 23:59}. 
+
+\item Reports should be submitted as a PDF file with the name  
+\begin{center}
+``\texttt{FEM21038-18-XXXXXX-YYYYYY.pdf}''
+\end{center}
+\noindent where \texttt{XXXXXX} and
+\texttt{YYYYYY} are the student numbers of the two group members.\newline
+\vspace{-6mm}
+\item Please make sure the file name is correct and your names and student numbers appear in the top-right corner of the first page of the report. 
+
+\item One group submission is sufficient (as long as you name the file correctly, see above).
+
+\item Matlab codes (or any other code) should \underline{not} be included in the main text.
+
+\item Instead, please submit a separate .zip file containing sub-folders with (Matlab) codes/files.
+
+%\item The system allows a maximum of 2 upload attempts. (Please email me if you need more attempts.)
+\end{itemize}
+
+\medskip\noindent Good luck! For questions related to the assignment, please send an email to:
+\\
+\texttt{lange@ese.eur.nl}
+
+\clearpage
+
+\noindent \textbf{Data description}
+
+\bigskip \noindent This assignment considers the following two time series:
+\begin{itemize}
+\item Real Gross Domestic Product (GDP), Billions of 2012 Dollars, Quarterly, Seasonally Adjusted Annual Rate
+\item Consumer Price Index (CPI) for All Urban Consumers: All Items, Index 1982-1984=100, Monthly, Seasonally Adjusted
+\end{itemize}
+These series, which are sampled at a quarterly and monthly frequency, respectively, can be found in the file \texttt{data.xls}. To obtain a balanced panel, we consider quarterly data for both series. Because both series contain \emph{levels}, we compute  annualised percentage changes by taking $y_{i,t}:=4\times 100\times(Y_{i,t}/Y_{i,t-1}-1)$, where the time index $t$ counts quarters. Here, $Y_{i,t}$ denotes the level, while $y_{i,t}$ denotes the (annualised) percentage change. The subscript $i=1$ ($i=2$) refers to  GDP (CPI) data. Further, the index $t$ runs from $t=1$ corresponding to Q1 (April) 1947 to $T=285$ corresponding to Q1 (April) 2018.  The data transformation has already been performed for you in the sheet ``data for assignment''. The data \emph{after this transformation} can also be found in  \texttt{data.csv} or \texttt{data.mat}, where the last file can be loaded directly into Matlab. For your convenience, the Matlab demo file \texttt{assignment.m} plots these two series with correct dates displayed on the horizontal axis.
+
+\bigskip
+
+\noindent \textbf{Question 1: Markov switching model [5 points]}
+
+\medskip\noindent 1a) Consider the series $y_{1,t}$ corresponding to the GDP. Use maximum likelihood (ML) to estimate a Markov  switching model with switching mean and variance, that is
+\[
+y_{1,t} \sim \mathrm{N}( \mu_{S_{t}} ,\sigma_{S_{t}}^{2})
+\] 
+where $S_{t}$ is a random variable with $\Pr[S_{t}=1|S_{t-1}=1]=p_{11}$ and $\Pr[S_{t}=2|S_{t-1}=2]=p_{22}$. We use the convention that $S_t=2$ denotes the high-volatility state. You are asked to investigate three possible initialisations. Initialise your model by imposing 
+\begin{itemize}
+\item that the filter starts in state one, i.e. set $\Pr(S_0=1|\mathcal{I}_0)=1$
+\item that the filter starts in state two, i.e. set $\Pr(S_0=2|\mathcal{I}_0)=1$
+\item that the filter starts in the long-term mean, set $\Pr(S_0=1|\mathcal{I}_0)=(1-p_{22}) / (2-p_{11}-p_{22})$ and $P(S_0=2|\mathcal{I}_0)=(1-p_{11}) / (2-p_{11}-p_{22})$
+\end{itemize} 
+You may consult (and use) the Matlab demo code you have been provided with during the course. Report your parameter estimates and resulting likelihood function in this table:
+\[
+\begin{array}{r|c@{\hspace{3mm}}c@{\hspace{3mm}}c@{\hspace{3mm}}c@{\hspace{3mm}}c@{\hspace{3mm}}c@{\hspace{3mm}}c}
+\mbox{Initialisation} & p_{11} & p_{22} & \mu_1 & \mu_2 &\sigma_1 & \sigma_2 & \mbox{LogL}\\ 
+   \hline
+\Pr(S_0=1|\mathcal{I}_0)=1& \cdot & \cdot & \cdot  & \cdot  & \cdot  & \cdot & \cdot \\
+\Pr(S_0=2|\mathcal{I}_0)=1& \cdot & \cdot & \cdot  & \cdot  & \cdot  & \cdot & \cdot\\
+\text{long-term mean} & \cdot & \cdot & \cdot  & \cdot  & \cdot  & \cdot & \cdot
+\end{array}
+\]
+Display two decimal places for your parameter estimates, and one for the log likelihood. 
+
+\medskip\noindent 1b) Which initialisation in question 1a do you believe to be more `correct'? Plot the smoothed probability $\Pr(S_t=2|\mathcal{I}_T)$ for this particular initialisation and, in no more than five sentences, comment on the result. 
+
+\medskip\noindent 1c) Pick any initialisation as in question 1a and estimate the model again, but now enforce the restriction $p_{11}+p_{22}=1$. For this restricted model, plot the smoothed probability $\Pr(S_t=2|\mathcal{I}_T)$ over time and compare the resulting graph with the one in question 1b. In no more than five sentences, comment on the similarities/differences. 
+
+\medskip\noindent 1d) Next, use the EM algorithm for Markov switching models to estimate the six parameters $p_{11},p_{22},\mu_1,\mu_2,\sigma_1,\sigma_2$ along with the starting points $\Pr(S_0=1)=\rho_1$ and $\Pr(S_0=2)=\rho_2$.  Since $\rho_1+\rho_2=1$, there are 7 parameters to estimate. As your initial parameter values, take $p_{11}=p_{22}=0.8$, set $\mu_1$ and $\mu_2$ equal to the sample mean, and take $\sigma_1$ and $\sigma_2$ equal to $0.5$ and $1.5$ times the sample standard deviation, respectively. For your first EM run, set $\hat{\Xxi}_{0|0}=(\rho_1,\rho_2)'$ with $\rho_1=\rho_2=0.5$. Each EM step should update 7 parameters indicated in the table below. Display your results up to four decimal places.
+
+\begin{itemize}
+\item
+Run 40 EM steps and complete the following table:
+\[
+\begin{array}{r@{\hspace{3mm}}|cccccccc}
+   \mbox{ EM estimates ($40$ iterations)}                   & \rho_1 & p_{11} & p_{22} & \mu_1 & \mu_2 &\sigma_1 & \sigma_2 & \mbox{LogL}\\ 
+   \hline
+\mbox{} & \cdot & \cdot & \cdot  & \cdot  & \cdot  & \cdot & \cdot &\cdot  
+\end{array}
+\]
+
+\item Plot the `convergence' of these estimated parameters for the first 40 EM iterations, so that you can visually see that the estimates `flatten out'. Paste this picture into your report.
+\item
+Run 1,000 EM steps and complete the following table:
+\[
+\begin{array}{r@{\hspace{3mm}}|cccccccc}
+   \mbox{EM estimates ($10^3$ iterations)}                   & \rho_1 & p_{11} & p_{22} & \mu_1 & \mu_2 &\sigma_1 & \sigma_2 & \mbox{LogL}\\ 
+   \hline
+\mbox{} & \cdot & \cdot & \cdot  & \cdot  & \cdot  & \cdot & \cdot  & \cdot \\
+\end{array}
+\]
+
+\item In no more than five sentences, discuss why the EM parameters after 1,000 iterations are similar and/or different to the parameters and log likelihood obtained in question 1a.
+\end{itemize}
+
+\noindent 1e) \emph{Bonus question}. The changes in GDP and CPI are expected to be correlated. Furthermore, this correlation might be higher in times of crisis. To investigate whether this is the case, consider again a two-state Markov switching model,  except now the observation $\Yy_t$ is two dimensional. That is, the observation consists of two percentages (GDP growth and inflation), which are assumed to be jointly normally distributed with mean $\Mmu_{S_t}$ and covariance matrix $\SSigma_{S_t}$, where both the mean and the covariance depend on the state $S_t$. Estimate this model by EM and report your estimates. Interpret your results in no more than five sentences. 
+
+\clearpage
+
+\noindent \textbf{Question 2: State space model [5 points]}
+
+\bigskip
+\noindent This question considers the same data as the previous question. However, for the purpose of this question, you should `de-mean' the two data series $y_{1,t}$ and $y_{2,t}$. From this point onwards, we use the symbol $y_{i,t}$ with $i=1,2$ to denote the two de-meaned macroeconomic series.
+
+\bigskip
+
+\medskip\noindent 2a)  Estimate a simple `AR(1) plus noise' model for both univariate series $y_{i,t}$ for $i=1,2$ and $t=1\ldots T$ by maximum likelihood (ML). That is, estimate the following model
+$$
+y_{i,t} = \xi_{i,t} + w_t, \quad w_t \sim \mathrm{N}(0,R),\quad \xi_{i,t+1}=F\,\xi_{i,t} + v_t, \quad v_t \sim \mathrm{N}(0,Q),
+$$
+for $i=1,2$. Use the Kalman filter with a diffuse initialisation; that is, take $\widehat{\xi}_{i,0|0}=0$ and $P_{i,0|0}=10^6$. Compute the log likelihood using the prediction-error decomposition and do not use a `burning period' (i.e., sum over all observations when computing the log likelihood). Report your estimates in the table below (use two decimal places for your parameter estimates and one decimal place for the log likelihood) and paste a figure of $y_{2,t}$ along with your smoothed state estimates $\widehat{\xi}_{2,t|T}$ into your answer sheet. \emph{Hint}: to answer this question, you may use the Kalman filter demo code you have been provided with.
+\[
+\begin{array}{r@{\hspace{3mm}}|cccccccc}
+   \mbox{ series }                   & F & Q & R & \mbox{LogL}\\ 
+   \hline
+i=1& \cdot & \cdot & \cdot  & \cdot \\
+
+i=2& \cdot & \cdot & \cdot  & \cdot \\
+\end{array}
+\]
+Note that, for computational reasons, \texttt{Matlab} minimizes negative log likelihoods; in your answer, please report (actual) log likelihoods.
+\bigskip
+
+\medskip\noindent 2b) Next, estimate a two-dimensional state space model on both series considered jointly. That is, consider the following state space model:
+\begin{equation}
+\label{2d}
+\left(
+\begin{array}{c}
+y_{1,t}\\
+y_{2,t}\\
+\end{array}
+\right)
+=
+\left(
+\begin{array}{c}
+\xi_{1,t}\\
+\xi_{2,t}\\
+\end{array}
+\right)+\Ww_t, 
+\qquad
+\left(
+\begin{array}{c}
+\xi_{1,t+1}\\
+\xi_{2,t+1}\\
+\end{array}
+\right)
+=
+\left(
+\begin{array}{cc}
+F_{11} & F_{12} \\
+F_{21} & F_{22}
+\end{array}
+\right)
+\left(
+\begin{array}{c}
+\xi_{1,t}\\
+\xi_{2,t}\\
+\end{array}
+\right)+\Vv_t, 
+\end{equation}
+and where $\Ww_t\sim \mathrm{N}(\mathbf{0},\RR)$ and $\Vv_t\sim \mathrm{N}(\mathbf{0},\QQ)$ are independently normally distributed innovations with covariance matrices
+\begin{equation}
+\label{2d-2}
+\RR=\left(
+\begin{array}{cc}
+R_{11} & R_{12} \\
+R_{12} & R_{22}\\
+\end{array}
+\right),\quad \text{and} \quad
+\QQ=\left(
+\begin{array}{ccccc}
+Q_{11} & Q_{12}  \\
+Q_{12} & Q_{22} 
+\end{array}
+\right).
+\end{equation}
+ Adjust the demo code for the Kalman filter that you have been given and estimate 10 unknown parameters $(F_{11}, F_{12},F_{21},F_{22},Q_{11},Q_{12},Q_{22},R_{11},R_{12},R_{22})'$ by maximum likelihood (ML). In your answer sheet, display two decimal places for each parameter estimate and one decimal place for the resulting log likelihood:
+\[
+\FF=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot
+\end{array}
+\right),\quad
+\QQ=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot \\
+\end{array}
+\right)\quad
+\quad
+\RR=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot \\
+\end{array}
+\right),\quad
+\mbox{LogL}=\cdot
+\]
+As above, use a diffuse initialisation in the Kalman filter and do not use a `burning period' when computing the log likelihood (i.e. compute the log likelihood by summing over all observations).
+
+\bigskip
+
+\noindent \emph{Hint 1:} You may use the Matlab optimisers \texttt{fmincon}, \texttt{fminunc} or \texttt{fminsearch}. For \texttt{fminunc} use the following settings:
+\\
+\hspace{1cm}
+\begin{equation*}
+\begin{array}{cl}
+&\footnotesize \texttt{options  =  optimset('fminunc');}\\
+
+&\footnotesize\texttt{options  =  optimset(options , 'MaxFunEvals' , 1e+6);}\\
+
+&\footnotesize\texttt{options  =  optimset(options , 'MaxIter'      ,1e+6);}\\
+
+&\footnotesize \texttt{options  =  optimset(options , 'TolFun'      , 1e-6);}\\
+
+&\footnotesize \texttt{options  =  optimset(options , 'TolX'        , 1e-6);}\\
+\end{array}
+\end{equation*}
+\\
+\noindent and likewise for the other two optimisers. Depending on your computer, the optimisation should not take longer than two minutes (\texttt{fminunc} tends to be fastest, \texttt{fminsearch} slowest). 
+\\
+
+\noindent \emph{Hint 2:} It may help to choose a `good' starting point for the optimisation. 
+\\
+
+\noindent \emph{Hint 3:} The Matlab function \texttt{mvnpdf} is know to give problems. Instead, use your own expression for the multivariate normal pdf. The multivariate normal distribution with parameters \texttt{mu} and \texttt{Sigma} evaluated at \texttt{y} is given by 
+\\
+\begin{equation*}
+\begin{array}{c}
+\footnotesize\texttt{1/sqrt(det(2*pi*Sigma))*exp(-1/2*(y-mu)'*inv(Sigma)*(y-mu))} 
+\end{array}
+\end{equation*}
+
+\noindent \emph{Hint 4:} The Matlab function \texttt{inv} can be slow or inaccurate. Instead, use \texttt{A}$\backslash$ \texttt{B} rather than \texttt{inv(A)B} for two matrices \texttt{A} and \texttt{B} of appropriate size. In this case, the multivariate normal distribution above reads
+\\
+\begin{equation*}
+\begin{array}{c}
+\footnotesize\texttt{1/sqrt(det(2*pi*Sigma))*exp(-1/2*(y-mu)'*((Sigma)$\backslash$(y-mu)))} 
+\end{array}
+\end{equation*}
+
+\medskip\noindent 2c) In no more than five sentences, discuss and interpret your parameter estimates in question~2b.
+
+\medskip\noindent 2d) How is the obtained log likelihood in question 2b related to the log likelihoods obtained in equation 2a? Do you prefer the two univariate models or the multivariate model? Your answer should contain at most six sentences.
+
+\medskip\noindent 2e) Use the expectation maximisation (EM) algorithm to estimate the parameters in the model given by \eqref{2d} and \eqref{2d-2}. You may use the diffuse initialisation for $\Xxi_0$ in each EM step, as in the EM demo code you received. As your starting point for the E-step of the algorithm, take
+\[
+\FF=\left(
+\begin{array}{cc}
+0.8 & 0 \\
+0 & 0.8
+\end{array}
+\right),\quad
+\QQ=\left(
+\begin{array}{cc}
+3 & 0 \\
+0 & 3 \\
+\end{array}
+\right)\quad
+\quad
+\RR=\left(
+\begin{array}{cc}
+4 & 0 \\
+0 & 4 \\
+\end{array}
+\right),
+\]
+Then report your parameter estimates after $10$, $100$ and $1,000$ iterations using two decimal places as follows:
+
+\bigskip
+\noindent EM estimates after 10 iterations:
+\[
+\FF=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot
+\end{array}
+\right),\quad
+\QQ=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot \\
+\end{array}
+\right)\quad
+\quad
+\RR=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot \\
+\end{array}
+\right),
+\]
+EM estimates after 100 iterations:
+\[
+\FF=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot
+\end{array}
+\right),\quad
+\QQ=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot \\
+\end{array}
+\right)\quad
+\quad
+\RR=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot \\
+\end{array}
+\right),
+\]
+EM estimates after $1,000$ iterations:
+\[
+\FF=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot
+\end{array}
+\right),\quad
+\QQ=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot \\
+\end{array}
+\right)\quad
+\quad
+\RR=\left(
+\begin{array}{cc}
+\cdot & \cdot \\
+\cdot & \cdot \\
+\end{array}
+\right),
+\]
+
+
+%Is your result consistent with the `Phillips curve'? Elaborate in no more than five sentences.
+
+\medskip
+
+\noindent \emph{Hint 1:} Due to bounded machine precision, the filtered/smoothed covariance matrix \texttt{P(:,:,t)} may become (slightly) unsymmetrical if the Kalman filter/smoother is computed many times. To avoid this from happening, you may calculate \texttt{P(:,:,t)} as usual and then set 
+$$
+\texttt{P(:,:,t)=(P(:,:,t)+P(:,:,t)')/2} 
+$$
+thereby entering a hard constraint that enforces symmetry. 
+
+\medskip
+
+\noindent \emph{Hint 2:}  Similarly, the covariance matrices in the M step of the EM-algorithm may become (slightly) unsymmetrical if the EM step is computed many times. To avoid this from happening, you may compute \texttt{Q} and \texttt{R} as usual, and then set \texttt{Q=(Q+Q')/2} and \texttt{R=(R+R')/2} to enforce symmetry before proceeding with another EM step. 
+
+\medskip\noindent 2f) \emph{Bonus question.} In question 2e, suppose $\Xxi_0\sim \mathrm{N}(\Mmu_0,\SSigma_0)$. Can you amend the EM algorithm to estimate $\Mmu_0$ and $\SSigma_0$? Report your results using two decimal places. Does your estimate of $\SSigma_0$ converge? If so, to what? Provide a detailed explanation of your answer.
+
+\bigskip
+
+\noindent \textbf{Bonus question [1 point]}
+
+\medskip\noindent 3) Consider the EM procedure proposed at the top of page 513 of `Economic Forecasting' by Elliott $\&$ Timmermann (2016), which is paraphrased here for your convenience, and using our notation. They suggest to (i) pick some $\HH$, $\FF$, $\QQ$ and $\RR$, (ii) run the Kalman filter to obtain filtered state estimates $\hat{\Xxi}_{t|t}$ and (iii) estimate the four system matrices by running linear regressions on the equations
+\[
+\Yy_t = \HH' \hat{\Xxi}_{t|t} + \Ww_t, \quad \Ww_t \sim \mathrm{N}(\mathbf{0}, \RR),
+\]
+\[
+\hat{\Xxi}_{t|t} = \FF \hat{\Xxi}_{t-1|t-1} + \Vv_t, \quad \Vv_t \sim \mathrm{N}(\mathbf{0}, \QQ),
+\]
+where $\Yy_t$ and $\hat{\Xxi}_{t|t}$ are treated as known, while $\HH$, $\FF$, $\QQ$ and $\RR$ are estimated by ordinary least squares (OLS). The idea is to repeat steps (ii) and (iii) until convergence. Disprove their procedure by showing that the `true' parameters are not a fixed point of the proposed algorithm. \\
+
+\noindent \emph{Hint}: Suppose we are \emph{given} the true matrices $\HH$, $\FF$, $\QQ$ and $\RR$ and we perform step (ii) of the proposed procedure. If the proposed procedure is correct, then  $\Yy_t - \HH' \hat{\Xxi}_{t|t}$ should be distributed as $\mathrm{N}(\mathbf{0},\RR)$. Similarly, $\hat{\Xxi}_{t|t}- \FF \hat{\Xxi}_{t-1|t-1}$ should be distributed as $\mathrm{N}(\mathbf{0},\QQ)$. Disprove both these claims by deriving the `true' distribution of $\Yy_t - \HH' \hat{\Xxi}_{t|t}$ and $\hat{\Xxi}_{t|t}- \FF \hat{\Xxi}_{t-1|t-1}$ under the true parameters.
+
+\end{document}
